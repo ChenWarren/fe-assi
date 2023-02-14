@@ -1,16 +1,26 @@
-import { useState } from 'react'
-import './App.css'
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import PostsView from './pages/PostsView'
+import PostDetail from './pages/PostDetail'
+
+
+/**
+ * Main App setup routing
+ * 
+ */
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <h1>Home</h1>
-      <PostsView/>
-    </>
+    <BrowserRouter>
+      <Routes>
+
+        {/* First route matches the home posts list view */}
+        <Route path="/" element={<PostsView />} />
+
+        {/* Second route matches the post detail view */}
+        <Route path="/post/:id" element={<PostDetail/>} />
+        
+      </Routes>
+    </BrowserRouter>
   )
 }
 
