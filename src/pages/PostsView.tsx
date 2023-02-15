@@ -1,6 +1,14 @@
+/**
+ * This component fetches the posts list from the API 
+ * and renders a link for each post
+ */
+
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Grid, Paper } from '@mui/material'
+import { Container } from '@mui/system'
+import NavigationBar from '../components/NavigationBar'
+import PostCard from '../components/PostCard'
 
 // Define the Post interface export it for using in other components
 export interface Post {
@@ -16,7 +24,7 @@ const PostsView = () => {
     const [renderPosts, setRenderPosts] = useState<Post[]>([])
     const [page, setPage] = useState(0)
     const [hasMore, setHasMore] = useState(true)
-    const loader = useRef<HTMLDivElement>(null)
+    const targetObserver = useRef<HTMLDivElement>(null)
 
     // Use the useEffect hook to fetch the posts list from the API
     useEffect(()=> {
@@ -52,34 +60,36 @@ const PostsView = () => {
             threshold: 1.0,
         }
 
+        // Initialize the IntersectionObserver and attach it to the targetObserver
         const observer = new IntersectionObserver(handleObserver, options)
 
-        if ( loader.current ) {
-            observer.observe(loader.current)
+        if ( targetObserver.current ) {
+            observer.observe(targetObserver.current)
         }
 
         return () => {
-            if ( loader.current ) {
+            if ( targetObserver.current ) {
                 observer.disconnect()
             }
         }
-
 
     }, [renderPosts])
 
     return (
         <>
-            <h1>Posts</h1>
-            <div>
-                {/* Map over the posts array and render a link for each*/}
-                { renderPosts.map( post => (
-                    <h2 key={post.id} ref={loader}>
-                        {/* Use the React Router Dom Link component to create a link to the post detail view */}
-                        <Link to={`/post/${post.id}`}>{post.title}</Link> 
-                    </h2>
-                ))}
-                {!hasMore && <div>--End--</div>}
-            </div>
+            <NavigationBar title='Posts'/>
+            <Container sx={{paddingY: 2, mt: 9}}>
+                <Grid container spacing={3}>
+                    {/* Map over the posts array and render a link for each*/}
+                    { renderPosts.map( post => (
+                        <Grid item key={post.id} xs={12} sm={6} md={3}>
+                            <Paper sx={{height: '100%',}} ref={targetObserver}>
+                                <PostCard post={post} />
+                            </Paper>
+                        </Grid>
+                    ))}
+                </Grid>
+            </Container>
         </>
     )
 }

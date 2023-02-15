@@ -1,12 +1,11 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import PostsView from './pages/PostsView'
-import PostDetail from './pages/PostDetail'
-
-
 /**
  * Main App setup routing
  * 
  */
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import PostsView from './pages/PostsView'
+import PostDetail from './pages/PostDetail'
 
 function App() {
   return (
@@ -18,7 +17,7 @@ function App() {
 
         {/* Second route matches the post detail view */}
         <Route path="/post/:id" element={<PostDetail/>} />
-        
+
       </Routes>
     </BrowserRouter>
   )
