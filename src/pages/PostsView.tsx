@@ -10,6 +10,7 @@ import { Container } from '@mui/system'
 import NavigationBar from '../components/NavigationBar'
 import PostCard from '../components/PostCard'
 
+
 // Define the Post interface export it for using in other components
 export interface Post {
     userId: number,
