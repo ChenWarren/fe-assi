@@ -79,18 +79,20 @@ const PostsView = () => {
     return (
         <>
             <NavigationBar title='Posts'/>
-            <Container sx={{paddingY: 2, mt: 9}}>
-                <Grid container spacing={3}>
-                    {/* Map over the posts array and render a link for each*/}
-                    { renderPosts.map( post => (
-                        <Grid item key={post.id} xs={12} sm={6} md={3}>
-                            <Paper sx={{height: '100%',}} ref={targetObserver}>
-                                <PostCard post={post} />
-                            </Paper>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Container>
+            { renderPosts && renderPosts.length > 0 &&
+                <Container sx={{paddingY: 2, mt: 9}}>
+                    <Grid container spacing={3}>
+                        {/* Map over the posts array and render a link for each*/}
+                        { renderPosts.map( post => (
+                            <Grid item key={post.id} xs={12} sm={6} md={3}>
+                                <Paper sx={{height: '100%',}} ref={targetObserver}>
+                                    <PostCard post={post} />
+                                </Paper>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Container>
+            }
         </>
     )
 }

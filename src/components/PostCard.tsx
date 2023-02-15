@@ -16,7 +16,7 @@ const PostCard = ({ post }: { post: Post }) => {
                 <Typography variant="body2" color="text.secondary" marginBottom={2}>
                     {post.body.substring(0,100)}...
                 </Typography>
-                <Button size='small' variant="outlined" color="primary" href={`/post/${post.id}`}>Read More</Button>
+                <Button size='small' variant="outlined" color="primary" href={`/post?id=${post.id}&userID=${post.userId}`}>Read More</Button>
             </CardContent>
         </Card>
     )

@@ -16,7 +16,7 @@ function App() {
         <Route path="/" element={<PostsView />} />
 
         {/* Second route matches the post detail view */}
-        <Route path="/post/:id" element={<PostDetail/>} />
+        <Route path="/post" element={<PostDetail/>} />
 
       </Routes>
     </BrowserRouter>
